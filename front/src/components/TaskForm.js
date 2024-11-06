@@ -1,5 +1,4 @@
-// TaskForm.js
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
 const TaskForm = ({ addTask, setPriorityFilter, setStatusFilter }) => {
@@ -10,8 +9,8 @@ const TaskForm = ({ addTask, setPriorityFilter, setStatusFilter }) => {
         const description = prompt('Enter task description:');
         if (!description) return;
 
-        const priority = prompt('Enter task priority (Low, Medium, High):');
-        if (!priority || !['Low', 'Medium', 'High'].includes(priority)) return;
+        const priority = prompt('Enter task priority (매우높음, 높음, 낮음, 매우낮음):');
+        if (!priority || !['매우높음', '높음', '낮음', '매우낮음'].includes(priority)) return;
 
         const dueDate = prompt('Enter task due date (YYYY-MM-DD):');
         if (!dueDate) return;
@@ -22,7 +21,7 @@ const TaskForm = ({ addTask, setPriorityFilter, setStatusFilter }) => {
             description,
             priority,
             dueDate,
-            status: '', // 초기 상태는 빈 값으로 설정
+            status: '진행중', // 기본 상태를 '진행중'으로 설정
         };
 
         addTask(newTask);
@@ -42,9 +41,10 @@ const TaskForm = ({ addTask, setPriorityFilter, setStatusFilter }) => {
                         className="ml-2 border border-gray-300 rounded p-1"
                     >
                         <option value="All">All</option>
-                        <option value="Low">Low</option>
-                        <option value="Medium">Medium</option>
-                        <option value="High">High</option>
+                        <option value="매우높음">매우높음</option>
+                        <option value="높음">높음</option>
+                        <option value="낮음">낮음</option>
+                        <option value="매우낮음">매우낮음</option>
                     </select>
                 </div>
                 <div className="w-1/2 flex items-center">
@@ -54,8 +54,8 @@ const TaskForm = ({ addTask, setPriorityFilter, setStatusFilter }) => {
                         className="ml-2 border border-gray-300 rounded p-1"
                     >
                         <option value="All">All</option>
-                        <option value="inProgress">In Progress</option>
-                        <option value="completed">Completed</option>
+                        <option value="진행중">진행중</option>
+                        <option value="마감">마감</option>
                     </select>
                 </div>
             </div>
