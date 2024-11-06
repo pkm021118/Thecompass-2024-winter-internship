@@ -20,7 +20,7 @@ body {
 /* 왼쪽 사이드바 스타일 */
 .sidebar {
     @apply bg-blue-500 text-white p-4 flex flex-col items-start rounded-l-2xl;
-    @apply basis-1/6; /* 컨테이너의 1/4 너비를 차지 */
+    @apply basis-1/6; /* 컨테이너의 1/6 너비를 차지 */
     @apply space-y-6; /* 항목 간 세로 간격 */
 }
 
@@ -31,7 +31,28 @@ body {
 
 /* 각 항목 스타일 */
 .sidebar ul li {
-    @apply text-lg font-medium hover:bg-blue-600 p-2 rounded w-full;
+    @apply flex items-center text-lg font-medium hover:bg-blue-600 p-2 rounded w-full;
+}
+
+/* 아이콘 스타일 */
+.sidebar ul li::before {
+    content: '';
+    display: inline-block;
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 1.25rem; /* 아이콘 너비 */
+    height: 1.25rem; /* 아이콘 높이 */
+    margin-right: 0.5rem;
+}
+
+/* 선택된 프로젝트 아이콘 */
+.sidebar ul li:first-child::before {
+    background-image: url('./assets/UnselectedProject.svg');
+}
+
+/* 선택되지 않은 태스크 아이콘 */
+.sidebar ul li:nth-child(2)::before {
+    background-image: url('./assets/UnselectedTask.svg');
 }
 
 /* 오른쪽 메인 콘텐츠 스타일 */

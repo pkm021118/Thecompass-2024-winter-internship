@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom'; // Link 추가
 import TaskForm from '../components/TaskForm';
 import TaskItem from '../components/TaskItem';
 import logo from '../assets/logo.svg';
@@ -23,8 +23,16 @@ const TaskPage = () => {
             <div className="sidebar">
                 <img src={logo} alt="Navigation Logo" className="w-24 h-24 mb-4" />
                 <ul className="space-y-2">
-                    <li>Projects</li>
-                    <li>Tasks</li>
+                    <li>
+                        <Link to="/projects" className="text-lg font-medium hover:bg-blue-600 p-2 rounded w-full block">
+                            Projects
+                        </Link>
+                    </li>
+                    <li>
+                        <Link to="/tasks" className="text-lg font-medium hover:bg-blue-600 p-2 rounded w-full block">
+                            Tasks
+                        </Link>
+                    </li>
                 </ul>
             </div>
             <div className="content">
@@ -34,12 +42,7 @@ const TaskPage = () => {
 
                 <div className="task-list space-y-4 mt-4">
                     {filteredTasks.map((task) => (
-                        <TaskItem
-                            key={task.id}
-                            task={task}
-                            tasks={tasks}
-                            setTasks={setTasks}
-                        />
+                        <TaskItem key={task.id} task={task} tasks={tasks} setTasks={setTasks} />
                     ))}
                 </div>
             </div>
