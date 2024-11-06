@@ -1,25 +1,40 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { useProjects } from '../context/ProjectContext';
 
-const ProjectList = () => {
-    const { projects, deleteProject } = useProjects();
+const ProjectList = ({ onSelectProject }) => {
+    const [projects, setProjects] = useState(() => {
+        const savedProjects = localStorage.getItem('projects');
+        return savedProjects ? JSON.parse(savedProjects) : [];
+    });
+
+    useEffect(() => {
+        localStorage.setItem('projects', JSON.stringify(projects));
+    }, [projects]);
+
+    const addProject = () => {
+        const name = prompt('Enter project name:');
+        if (name) {
+            const newProject = { id: Date.now(), name };
+            setProjects([...projects, newProject]);
+        }
+    };
 
     return (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {projects.map((project) => (
-                <div key={project.id} className="bg-white shadow-md rounded-lg p-4">
-                    <Link to={`/projects/${project.id}`}>
-                        <h3 className="text-xl font-semibold mb-2">{project.name}</h3>
-                    </Link>
-                    <button
-                        onClick={() => deleteProject(project.id)}
-                        className="mt-4 text-sm text-red-500 hover:underline"
+        <div>
+            <button onClick={addProject} className="mt-4 bg-blue-500 text-white py-2 px-4 rounded">
+                Add Project
+            </button>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-4">
+                {projects.map((project) => (
+                    <div
+                        key={project.id}
+                        className="bg-white shadow-md rounded-lg p-4 cursor-pointer"
+                        onClick={() => onSelectProject(project)}
                     >
-                        Delete
-                    </button>
-                </div>
-            ))}
+                        <h3 className="text-xl font-semibold mb-2">{project.name}</h3>
+                    </div>
+                ))}
+            </div>
         </div>
     );
 };
