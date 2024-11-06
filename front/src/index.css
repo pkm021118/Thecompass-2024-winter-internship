@@ -2,14 +2,49 @@
 @tailwind components;
 @tailwind utilities;
 
+/* body 스타일 */
 body {
-    @apply bg-gray-100 text-gray-900 font-sans;
+    @apply bg-cover bg-center bg-gray-100 text-gray-900 font-sans;
+    background-image: url('./assets/background.svg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: top 20%;
+    background-attachment: fixed;
 }
 
+/* 메인 컨테이너 스타일 */
+.container {
+    @apply w-10/12 md:w-8/12 lg:w-7/12 mx-auto bg-white rounded-2xl shadow-lg min-h-screen min-h-[75vh] mt-[10vh] flex;
+}
+
+/* 왼쪽 사이드바 스타일 */
+.sidebar {
+    @apply bg-blue-500 text-white p-4 flex flex-col items-start rounded-l-2xl;
+    @apply basis-1/6; /* 컨테이너의 1/4 너비를 차지 */
+    @apply space-y-6; /* 항목 간 세로 간격 */
+}
+
+/* 프로젝트와 태스크 목록을 아래로 이동시키기 위한 추가 마진 */
+.sidebar ul {
+    @apply mt-8; /* 상단 여백을 추가해 아래로 이동 */
+}
+
+/* 각 항목 스타일 */
+.sidebar ul li {
+    @apply text-lg font-medium hover:bg-blue-600 p-2 rounded w-full;
+}
+
+/* 오른쪽 메인 콘텐츠 스타일 */
+.content {
+    @apply flex-1 p-4;
+}
+
+/* 헤더 스타일 */
 h1, h2, h3, h4, h5, h6 {
     @apply font-semibold text-gray-800;
 }
 
+/* 버튼 기본 스타일 */
 button {
     @apply rounded focus:outline-none focus:ring-2 focus:ring-blue-500;
 }
